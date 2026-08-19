@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -554,7 +553,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="contact-list">
           <a href="mailto:mayilwings26@gmail.com"><span>Email</span><span>mayilwings26@gmail.com</span></a>
           <a href="tel:+917550078618"><span>Phone</span><span>7550078618 · 8610578887</span></a>
-          <a href="https://instagram.com/mayi_wings" target="_blank" rel="noopener"><span>Instagram</span><span>@mayi_wings</span></a>
+          <a href="https://instagram.com/mayil_wings" target="_blank" rel="noopener"><span>Instagram</span><span>@mayil_wings</span></a>
         </div>
       </div>
       <div class="bigsig reveal">Hemalatha R</div>
