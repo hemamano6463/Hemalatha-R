@@ -107,7 +107,11 @@
     background:rgba(251,248,243,.88);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 32px;max-width:1180px;margin:0 auto;}
+  .nav .mark{justify-self:start;grid-column:1;}
+  .nav ul{justify-self:center;grid-column:2;}
+  .nav .cta{justify-self:end;grid-column:3;}
+  .nav .burger{justify-self:end;grid-column:3;}
   .nav .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.5px;}
   .nav .mark span{color:var(--red);}
   .nav ul{display:flex;gap:34px;list-style:none;}
