@@ -115,7 +115,17 @@
   .nav .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.5px;}
   .nav .mark span{color:var(--red);}
   .nav ul{display:flex;gap:34px;list-style:none;}
-  .nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;position:relative;}
+  .nav a{
+  color:var(--ink);
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  position:relative;
+  line-height:1;
+  display:inline-block;
+}
   .nav a:after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--red);transition:width .25s ease;}
   .nav a:hover:after{width:100%;}
   .nav .cta{
