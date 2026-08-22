@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function(){
     </ul>
 
     <a href="#contact" class="nav-cta">Let's Talk</a>
-</nav>
+<nav>
     <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
