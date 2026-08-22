@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#FBF8F3">
 <title>Hemalatha R — Creative Designer Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +19,7 @@
     --grey:#6B6560;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;scroll-padding-top:90px;}
+  html{scroll-behavior:smooth;scroll-padding-top:90px;background:#FBF8F3;color-scheme:light;}
 
   /* ---------- Animation keyframes ---------- */
   @keyframes fadeUp{
@@ -108,23 +111,22 @@
   }
   .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 32px;max-width:1180px;margin:0 auto;}
   .nav .mark{justify-self:start;grid-column:1;}
-  .nav ul{justify-self:center;grid-column:2;}
-  .nav .cta{justify-self:end;grid-column:3;}
-  .nav .burger{justify-self:end;grid-column:3;}
+  .nav ul{display:none;}
+  .nav .cta{display:none;}
+  .nav .burger{justify-self:end;grid-column:3;grid-column-start:3;}
+  .nav{grid-template-columns:1fr auto;}
   .nav .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.5px;}
   .nav .mark span{color:var(--red);}
-  .nav ul{display:flex;gap:34px;list-style:none;}
-  .nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;position:relative;}
-  .nav a:after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--red);transition:width .25s ease;}
-  .nav a:hover:after{width:100%;}
-  .nav .cta{
-    background:var(--ink);color:#fff;padding:10px 20px;border-radius:2px;
-    text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.04em;
+  .nav a{
+    color:var(--ink);text-decoration:none;font-weight:600;font-size:13.5px;
+    letter-spacing:.03em;text-transform:uppercase;position:relative;
+    padding:9px 18px;border-radius:999px;border:1.4px solid transparent;
+    transition:background .25s ease,border-color .25s ease,color .25s ease;
   }
-  .nav .cta:after{display:none;}
-  .nav .cta:hover{background:var(--red);}
+  .nav a:hover{background:var(--ink);color:#fff;}
+  .nav a.active{background:var(--red);color:#fff;border-color:var(--red);}
   .burger{
-    display:none;background:none;border:none;cursor:pointer;
+    display:block;background:none;border:none;cursor:pointer;
     width:34px;height:26px;position:relative;z-index:60;flex-shrink:0;
   }
   .burger span{
@@ -139,8 +141,8 @@
   .burger.open span:nth-child(3){top:12px;transform:rotate(-45deg);}
 
   .mobile-menu{
-    display:none;
-    position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);
+    display:flex;
+    position:fixed;top:0;right:0;height:100vh;width:min(78vw,340px);
     background:var(--ink);z-index:55;
     flex-direction:column;justify-content:center;gap:6px;padding:40px;
     transform:translateX(100%);transition:transform .35s cubic-bezier(.22,.8,.32,1);
@@ -152,7 +154,7 @@
   }
   .mobile-menu a.cta-mobile{color:var(--red);}
   .menu-overlay{
-    display:none;position:fixed;inset:0;background:rgba(22,20,20,.5);z-index:54;
+    display:block;position:fixed;inset:0;background:rgba(22,20,20,.5);z-index:54;
     opacity:0;transition:opacity .3s ease;pointer-events:none;
   }
   .menu-overlay.open{opacity:1;pointer-events:auto;}
@@ -353,11 +355,6 @@
     .work-card.wide{grid-column:span 1;}
     .contact-grid{grid-template-columns:1fr;gap:36px;}
     .contact .bigsig{text-align:left;}
-    .nav ul{display:none;}
-    .nav .cta{display:none;}
-    .burger{display:block;}
-    .mobile-menu{display:flex;}
-    .menu-overlay{display:block;}
   }
   @media(max-width:600px){
     .svc-grid{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none;}
@@ -401,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <header>
   <nav class="nav">
-    <div class="mark">HEMALATHA<span>.</span></div>
+    <div class="mark">HEMALATHA R<span>.</span></div>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
