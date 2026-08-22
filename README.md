@@ -400,14 +400,14 @@ document.addEventListener('DOMContentLoaded', function(){
 <body>
 
 <header>
-  <nav class="nav">
-    <div class="mark">HEMALATHA<span>.</span></div>
+  <nav>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
+        ...
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
     </ul>
+</nav>
     <a class="cta" href="#contact">Let's Talk</a>
     <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
