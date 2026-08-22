@@ -402,13 +402,14 @@ document.addEventListener('DOMContentLoaded', function(){
 <header>
   <nav>
     <ul>
-        ...
+        <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+
+    <a href="#contact" class="nav-cta">Let's Talk</a>
 </nav>
-    <a class="cta" href="#contact">Let's Talk</a>
     <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
