@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -103,6 +104,50 @@
   .pinwheel svg{width:100%;height:100%;display:block;}
 
   /* ---------- Nav ---------- */
+  /* ---------- Sidebar Navigation (desktop) ---------- */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:230px;z-index:60;
+    background:var(--cream);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;
+    padding:36px 30px;
+    animation:sidebarSlide .7s cubic-bezier(.22,.8,.32,1) both;
+  }
+  @keyframes sidebarSlide{
+    from{opacity:0;transform:translateX(-24px);}
+    to{opacity:1;transform:translateX(0);}
+  }
+  .sidebar-mark{
+    font-family:'Anton',sans-serif;font-size:19px;letter-spacing:.5px;
+    transition:transform .3s ease;
+  }
+  .sidebar-mark:hover{transform:scale(1.05);}
+  .sidebar-mark span{color:var(--red);}
+  .sidebar-nav{display:flex;flex-direction:column;gap:24px;margin-top:38px;}
+  .sidebar-nav a{
+    color:var(--ink);text-decoration:none;font-weight:500;font-size:13px;
+    letter-spacing:.14em;text-transform:uppercase;position:relative;
+    padding-left:0;transition:padding-left .3s ease,color .3s ease;
+  }
+  .sidebar-nav a:before{
+    content:'';position:absolute;left:-18px;top:50%;transform:translateY(-50%);
+    width:0;height:1px;background:var(--red);transition:width .3s ease;
+  }
+  .sidebar-nav a:hover,.sidebar-nav a.active{color:var(--red-dark);padding-left:10px;}
+  .sidebar-nav a:hover:before,.sidebar-nav a.active:before{width:26px;}
+  .sidebar-foot-spacer{flex:1;}
+  .sidebar-icons{display:flex;gap:12px;border-top:1px solid var(--line);padding-top:22px;}
+  .sidebar-icons a{
+    width:36px;height:36px;border-radius:50%;border:1.4px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;color:var(--ink);
+    transition:background .3s ease,color .3s ease,transform .3s ease,border-color .3s ease;
+  }
+  .sidebar-icons a svg{width:17px;height:17px;}
+  .sidebar-icons a:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-3px);}
+  .site-content{margin-left:230px;}
+
+  /* ---------- Mobile header (hidden on desktop) ---------- */
+  .mobile-header{display:none;}
+
   header{
     position:fixed;top:0;left:0;right:0;z-index:60;
     background:rgba(251,248,243,.88);backdrop-filter:blur(8px);
@@ -115,10 +160,11 @@
   }
   .nav .mark{transition:transform .3s ease;}
   .nav .mark:hover{transform:scale(1.04);}
-  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px 32px;max-width:1180px;margin:0 auto;}
-  .nav .mark{justify-self:start;grid-column:1;}
+  .nav{display:grid;grid-template-columns:1fr auto;align-items:center;padding:20px 24px;}
+  .nav .mark{justify-self:start;}
+  .nav .burger{justify-self:end;}
   .nav ul{justify-self:center;grid-column:2;display:flex;gap:44px;list-style:none;}
-  .nav .burger{justify-self:end;grid-column:3;display:none;}
+  .nav .burger{justify-self:end;grid-column:3;}
   .nav .mark{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;}
   .nav .mark span{color:var(--red);}
   .nav a{
@@ -199,7 +245,7 @@
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
-    padding:170px 0 90px;
+    padding:100px 0 90px;
     overflow:hidden;
   }
   .hero .wrap{position:relative;z-index:2;}
@@ -421,9 +467,10 @@
     .work-card.wide{grid-column:span 1;}
     .contact-grid{grid-template-columns:1fr;gap:36px;}
     .contact .bigsig{text-align:left;}
-    .nav{grid-template-columns:1fr auto;}
-    .nav ul{display:none;}
-    .nav .burger{display:block;}
+    .sidebar{display:none;}
+    .site-content{margin-left:0;}
+    .mobile-header{display:block;}
+    .hero{padding-top:150px;}
   }
   @media(max-width:600px){
     .svc-grid{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none;}
@@ -465,15 +512,31 @@ document.addEventListener('DOMContentLoaded', function(){
 </head>
 <body>
 
-<header>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-mark">HEMALATHA R<span>.</span></div>
+  <nav class="sidebar-nav">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="sidebar-foot-spacer"></div>
+  <div class="sidebar-icons">
+    <a href="mailto:mayilwings26@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm2 0 8 6 8-6M4 6v12h16V6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="https://wa.me/918610578887" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.66 4.52 1.8 6.38L4 29l7.79-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.63 28 15S22.63 3 16.004 3Zm0 21.8a9.77 9.77 0 0 1-4.98-1.36l-.357-.213-4.62 1.04 1.02-4.5-.234-.37A9.76 9.76 0 0 1 6.2 15c0-5.41 4.4-9.8 9.804-9.8 5.4 0 9.796 4.39 9.796 9.8s-4.396 9.8-9.796 9.8Zm5.37-7.34c-.294-.147-1.74-.86-2.01-.958-.27-.098-.467-.147-.664.147-.196.294-.76.958-.932 1.155-.172.196-.343.22-.637.073-.294-.147-1.243-.458-2.368-1.463-.875-.78-1.466-1.744-1.638-2.038-.172-.294-.018-.453.13-.6.133-.132.294-.343.44-.514.148-.172.197-.294.295-.49.098-.196.05-.368-.024-.514-.073-.147-.663-1.6-.91-2.19-.24-.575-.484-.497-.663-.507l-.564-.01c-.196 0-.514.073-.784.368-.27.294-1.03 1.006-1.03 2.454s1.055 2.847 1.2 3.043c.147.196 2.077 3.17 5.033 4.445.703.303 1.252.484 1.68.62.706.225 1.348.193 1.856.117.566-.085 1.74-.712 1.986-1.4.245-.688.245-1.278.172-1.4-.073-.122-.27-.196-.564-.343Z"/></svg>
+    </a>
+    <a href="https://instagram.com/mayil_wings" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+    </a>
+  </div>
+</aside>
+
+<header class="mobile-header">
   <nav class="nav">
     <div class="mark">HEMALATHA R<span>.</span></div>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
     <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -487,6 +550,8 @@ document.addEventListener('DOMContentLoaded', function(){
   <a href="#work">Work</a>
   <a href="#contact">Contact</a>
 </nav>
+
+<div class="site-content" id="siteContent">
 
 <section class="hero">
   <div class="bg-blob" style="width:420px;height:420px;top:-140px;right:-120px;background:radial-gradient(circle,rgba(240,48,59,.22),transparent 70%);animation:blobDriftA 16s ease-in-out infinite;"></div>
@@ -670,6 +735,8 @@ document.addEventListener('DOMContentLoaded', function(){
     <div>Designed with CorelDRAW · Photoshop · Canva</div>
   </div>
 </footer>
+
+</div>
 
 <script>
 (function(){
