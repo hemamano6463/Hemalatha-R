@@ -115,27 +115,23 @@
   }
   .nav .mark{transition:transform .3s ease;}
   .nav .mark:hover{transform:scale(1.04);}
-  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 32px;max-width:1180px;margin:0 auto;}
+  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px 32px;max-width:1180px;margin:0 auto;}
   .nav .mark{justify-self:start;grid-column:1;}
-  .nav ul{justify-self:center;grid-column:2;display:flex;gap:8px;list-style:none;}
-  .nav .cta{justify-self:end;grid-column:3;}
+  .nav ul{justify-self:center;grid-column:2;display:flex;gap:44px;list-style:none;}
   .nav .burger{justify-self:end;grid-column:3;display:none;}
-  .nav .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.5px;}
+  .nav .mark{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;}
   .nav .mark span{color:var(--red);}
   .nav a{
-    color:var(--ink);text-decoration:none;font-weight:600;font-size:13.5px;
-    letter-spacing:.03em;text-transform:uppercase;position:relative;
-    padding:9px 18px;border-radius:999px;border:1.4px solid transparent;
-    transition:background .25s ease,border-color .25s ease,color .25s ease;
+    color:var(--ink);text-decoration:none;font-weight:500;font-size:12.5px;
+    letter-spacing:.18em;text-transform:uppercase;position:relative;
+    padding:4px 0;
   }
-  .nav a:hover{background:var(--ink);color:#fff;}
-  .nav a.active{background:var(--red);color:#fff;border-color:var(--red);}
-  .nav .cta{
-    background:var(--ink);color:#fff;padding:10px 22px;border-radius:999px;
-    text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.04em;
-    transition:background .25s ease;
+  .nav a:after{
+    content:'';position:absolute;left:50%;bottom:-4px;width:0;height:1px;
+    background:var(--red);transition:width .35s ease,left .35s ease;
   }
-  .nav .cta:hover{background:var(--red);color:#fff;}
+  .nav a:hover:after,.nav a.active:after{width:100%;left:0;}
+  .nav a:hover,.nav a.active{color:var(--red-dark);}
   .burger{
     display:block;background:none;border:none;cursor:pointer;
     width:34px;height:26px;position:relative;z-index:60;flex-shrink:0;
@@ -427,7 +423,6 @@
     .contact .bigsig{text-align:left;}
     .nav{grid-template-columns:1fr auto;}
     .nav ul{display:none;}
-    .nav .cta{display:none;}
     .nav .burger{display:block;}
   }
   @media(max-width:600px){
@@ -479,7 +474,6 @@ document.addEventListener('DOMContentLoaded', function(){
       <li><a href="#work">Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="cta" href="#contact">Let's Talk</a>
     <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
