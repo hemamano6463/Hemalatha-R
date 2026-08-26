@@ -102,19 +102,36 @@
   .pinwheel{width:96px;height:96px;position:relative;flex-shrink:0;}
   .pinwheel svg{width:100%;height:100%;display:block;}
 
-  /* ---------- Nav ---------- */
-  /* ---------- Sidebar Navigation (desktop) ---------- */
+  /* ---------- Top bar (persistent, all screens) ---------- */
+  .top-bar{
+    position:fixed;top:0;left:0;right:0;z-index:65;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 28px;
+    background:rgba(251,248,243,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    animation:headerDrop .7s cubic-bezier(.22,.8,.32,1) both;
+  }
+  @keyframes headerDrop{
+    from{opacity:0;transform:translateY(-100%);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .top-bar .mark{
+    font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;
+    transition:transform .3s ease;
+  }
+  .top-bar .mark:hover{transform:scale(1.04);}
+  .top-bar .mark span{color:var(--red);}
+
+  /* ---------- Sidebar (off-canvas drawer, all screens) ---------- */
   .sidebar{
-    position:fixed;top:0;left:0;bottom:0;width:230px;z-index:60;
+    position:fixed;top:0;left:0;bottom:0;width:270px;z-index:70;
     background:var(--cream);border-right:1px solid var(--line);
     display:flex;flex-direction:column;
     padding:36px 30px;
-    animation:sidebarSlide .7s cubic-bezier(.22,.8,.32,1) both;
+    transform:translateX(-100%);
+    transition:transform .4s cubic-bezier(.22,.8,.32,1);
   }
-  @keyframes sidebarSlide{
-    from{opacity:0;transform:translateX(-24px);}
-    to{opacity:1;transform:translateX(0);}
-  }
+  .sidebar.open{transform:translateX(0);}
   .sidebar-mark{
     font-family:'Anton',sans-serif;font-size:19px;letter-spacing:.5px;
     transition:transform .3s ease;
@@ -126,7 +143,13 @@
     color:var(--ink);text-decoration:none;font-weight:500;font-size:13px;
     letter-spacing:.14em;text-transform:uppercase;position:relative;
     padding-left:0;transition:padding-left .3s ease,color .3s ease;
+    opacity:0;transform:translateX(16px);
   }
+  .sidebar.open .sidebar-nav a{opacity:1;transform:translateX(0);transition:opacity .4s ease,transform .4s ease,padding-left .3s ease,color .3s ease;}
+  .sidebar.open .sidebar-nav a:nth-child(1){transition-delay:.08s;}
+  .sidebar.open .sidebar-nav a:nth-child(2){transition-delay:.14s;}
+  .sidebar.open .sidebar-nav a:nth-child(3){transition-delay:.2s;}
+  .sidebar.open .sidebar-nav a:nth-child(4){transition-delay:.26s;}
   .sidebar-nav a:before{
     content:'';position:absolute;left:-18px;top:50%;transform:translateY(-50%);
     width:0;height:1px;background:var(--red);transition:width .3s ease;
@@ -142,44 +165,10 @@
   }
   .sidebar-icons a svg{width:17px;height:17px;}
   .sidebar-icons a:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-3px);}
-  .site-content{margin-left:230px;}
-
-  /* ---------- Mobile header (hidden on desktop) ---------- */
-  .mobile-header{display:none;}
-
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:60;
-    background:rgba(251,248,243,.88);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-    animation:headerDrop .7s cubic-bezier(.22,.8,.32,1) both;
-  }
-  @keyframes headerDrop{
-    from{opacity:0;transform:translateY(-100%);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  .nav .mark{transition:transform .3s ease;}
-  .nav .mark:hover{transform:scale(1.04);}
-  .nav{display:grid;grid-template-columns:1fr auto;align-items:center;padding:20px 24px;}
-  .nav .mark{justify-self:start;}
-  .nav .burger{justify-self:end;}
-  .nav ul{justify-self:center;grid-column:2;display:flex;gap:44px;list-style:none;}
-  .nav .burger{justify-self:end;grid-column:3;}
-  .nav .mark{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;}
-  .nav .mark span{color:var(--red);}
-  .nav a{
-    color:var(--ink);text-decoration:none;font-weight:500;font-size:12.5px;
-    letter-spacing:.18em;text-transform:uppercase;position:relative;
-    padding:4px 0;
-  }
-  .nav a:after{
-    content:'';position:absolute;left:50%;bottom:-4px;width:0;height:1px;
-    background:var(--red);transition:width .35s ease,left .35s ease;
-  }
-  .nav a:hover:after,.nav a.active:after{width:100%;left:0;}
-  .nav a:hover,.nav a.active{color:var(--red-dark);}
+  .site-content{margin-left:0;padding-top:76px;}
   .burger{
-    display:block;background:none;border:none;cursor:pointer;
-    width:34px;height:26px;position:relative;z-index:60;flex-shrink:0;
+    display:flex;background:none;border:none;cursor:pointer;
+    width:34px;height:26px;position:relative;z-index:71;flex-shrink:0;
   }
   .burger span{
     position:absolute;left:0;width:100%;height:2.4px;background:var(--ink);
@@ -192,62 +181,19 @@
   .burger.open span:nth-child(2){opacity:0;}
   .burger.open span:nth-child(3){top:12px;transform:rotate(-45deg);}
 
-  .mobile-menu{
-    display:flex;
-    position:fixed;top:0;right:0;height:100vh;width:min(78vw,340px);
-    background:var(--ink);z-index:55;
-    flex-direction:column;justify-content:center;gap:6px;padding:40px;
-    transform:translateX(100%);transition:transform .35s cubic-bezier(.22,.8,.32,1);
-  }
-  .mobile-menu.open{transform:translateX(0);}
-  .mobile-menu a{
-    color:#fff;text-decoration:none;font-family:'Anton',sans-serif;font-size:28px;
-    padding:14px 0;border-bottom:1px solid #33302e;letter-spacing:.01em;
-    opacity:0;transform:translateX(24px);transition:opacity .4s ease,transform .4s ease,color .25s ease;
-  }
-  .mobile-menu.open a{opacity:1;transform:translateX(0);}
-  .mobile-menu.open a:nth-child(1){transition-delay:.08s;}
-  .mobile-menu.open a:nth-child(2){transition-delay:.14s;}
-  .mobile-menu.open a:nth-child(3){transition-delay:.2s;}
-  .mobile-menu.open a:nth-child(4){transition-delay:.26s;}
-  .mobile-menu a:hover{color:var(--red);padding-left:8px;}
-  .mobile-menu a.cta-mobile{color:var(--red);}
   .menu-overlay{
-    display:block;position:fixed;inset:0;background:rgba(22,20,20,.5);z-index:54;
+    display:block;position:fixed;inset:0;background:rgba(22,20,20,.5);z-index:68;
     opacity:0;transition:opacity .3s ease;pointer-events:none;
   }
   .menu-overlay.open{opacity:1;pointer-events:auto;}
 
-  .whatsapp-float{
-    position:fixed;bottom:24px;right:24px;z-index:70;
-    width:56px;height:56px;border-radius:50%;background:#25D366;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 18px rgba(0,0,0,.25);
-    transition:transform .25s ease,box-shadow .25s ease;
-    animation:wafloat 3.2s ease-in-out infinite;
-  }
-  .whatsapp-float:hover{transform:scale(1.08);box-shadow:0 8px 22px rgba(0,0,0,.32);}
-  .whatsapp-float svg{width:30px;height:30px;fill:#fff;}
-  @keyframes wafloat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-6px);}
-  }
-  .whatsapp-float:hover{animation-play-state:paused;}
-  @media (prefers-reduced-motion: reduce){
-    .whatsapp-float{animation:none;}
-  }
-  @media(max-width:600px){
-    .whatsapp-float{width:50px;height:50px;bottom:18px;right:18px;}
-    .whatsapp-float svg{width:26px;height:26px;}
-  }
-
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
-    padding:100px 0 90px;
+    padding:56px 0 80px;
     overflow:hidden;
   }
-  .hero .wrap{position:relative;z-index:2;}
+  .hero .wrap{position:relative;z-index:2;max-width:920px;}
   .corner-tl, .corner-br{position:absolute;opacity:.9;}
   .corner-tl{top:24px;left:24px;}
   .corner-br{bottom:24px;right:24px;transform:rotate(180deg);}
@@ -263,7 +209,7 @@
     font-family:'Anton',sans-serif;
     font-weight:400;
     line-height:.9;
-    font-size:clamp(64px,12vw,176px);
+    font-size:clamp(64px,10vw,148px);
     letter-spacing:-.01em;
   }
   .hero h1 .fill{color:var(--red);-webkit-text-stroke:1px var(--red);}
@@ -279,7 +225,7 @@
     font-weight:700;
     font-size:clamp(46px,7.5vw,96px);
     color:var(--ink);
-    margin-top:4px;
+    margin-top:-26px;
     filter:drop-shadow(2px 3px 0 var(--cream));
     display:inline-block;
     opacity:0;
@@ -443,14 +389,10 @@
     font-family:'Caveat',cursive;font-weight:700;font-size:clamp(40px,7vw,92px);
     text-align:right;opacity:.95;white-space:nowrap;
   }
-  .icon-links{display:flex;gap:14px;justify-content:flex-end;margin-top:22px;}
-  .icon-links a{
-    width:46px;height:46px;border-radius:50%;border:1.6px solid rgba(255,255,255,.55);
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    transition:background .3s ease,transform .3s ease,border-color .3s ease;
+  .contact .bigsig-tag{
+    font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.75);margin-top:6px;
   }
-  .icon-links a svg{width:22px;height:22px;}
-  .icon-links a:hover{background:#fff;color:var(--red);border-color:#fff;transform:translateY(-4px);}
   .contact-tri{position:absolute;opacity:.18;}
 
   footer{
@@ -466,10 +408,6 @@
     .work-card.wide{grid-column:span 1;}
     .contact-grid{grid-template-columns:1fr;gap:36px;}
     .contact .bigsig{text-align:left;}
-    .sidebar{display:none;}
-    .site-content{margin-left:0;}
-    .mobile-header{display:block;}
-    .hero{padding-top:150px;}
   }
   @media(max-width:600px){
     .svc-grid{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none;}
@@ -478,6 +416,7 @@
     .wrap{padding:0 20px;}
     .hero h1{font-size:15vw;line-height:.95;}
     .hero .signature{font-size:11vw;}
+    .sidebar{width:min(82vw,270px);}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -511,6 +450,15 @@ document.addEventListener('DOMContentLoaded', function(){
 </head>
 <body>
 
+<header class="top-bar">
+  <div class="mark">HEMALATHA R<span>.</span></div>
+  <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-mark">HEMALATHA R<span>.</span></div>
   <nav class="sidebar-nav">
@@ -532,23 +480,6 @@ document.addEventListener('DOMContentLoaded', function(){
     </a>
   </div>
 </aside>
-
-<header class="mobile-header">
-  <nav class="nav">
-    <div class="mark">HEMALATHA R<span>.</span></div>
-    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-</header>
-
-<div class="menu-overlay" id="menuOverlay"></div>
-<nav class="mobile-menu" id="mobileMenu">
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#work">Work</a>
-  <a href="#contact">Contact</a>
-</nav>
 
 <div class="site-content" id="siteContent">
 
@@ -712,17 +643,7 @@ document.addEventListener('DOMContentLoaded', function(){
       </div>
       <div class="reveal" style="text-align:right;">
         <div class="bigsig">Hemalatha R</div>
-        <div class="icon-links">
-          <a href="mailto:mayilwings26@gmail.com" aria-label="Email">
-            <svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm2 0 8 6 8-6M4 6v12h16V6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://wa.me/918610578887" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.66 4.52 1.8 6.38L4 29l7.79-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.63 28 15S22.63 3 16.004 3Zm0 21.8a9.77 9.77 0 0 1-4.98-1.36l-.357-.213-4.62 1.04 1.02-4.5-.234-.37A9.76 9.76 0 0 1 6.2 15c0-5.41 4.4-9.8 9.804-9.8 5.4 0 9.796 4.39 9.796 9.8s-4.396 9.8-9.796 9.8Zm5.37-7.34c-.294-.147-1.74-.86-2.01-.958-.27-.098-.467-.147-.664.147-.196.294-.76.958-.932 1.155-.172.196-.343.22-.637.073-.294-.147-1.243-.458-2.368-1.463-.875-.78-1.466-1.744-1.638-2.038-.172-.294-.018-.453.13-.6.133-.132.294-.343.44-.514.148-.172.197-.294.295-.49.098-.196.05-.368-.024-.514-.073-.147-.663-1.6-.91-2.19-.24-.575-.484-.497-.663-.507l-.564-.01c-.196 0-.514.073-.784.368-.27.294-1.03 1.006-1.03 2.454s1.055 2.847 1.2 3.043c.147.196 2.077 3.17 5.033 4.445.703.303 1.252.484 1.68.62.706.225 1.348.193 1.856.117.566-.085 1.74-.712 1.986-1.4.245-.688.245-1.278.172-1.4-.073-.122-.27-.196-.564-.343Z"/></svg>
-          </a>
-          <a href="https://instagram.com/mayil_wings" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
-          </a>
-        </div>
+        <div class="bigsig-tag">Graphic Designer</div>
       </div>
     </div>
   </div>
@@ -799,41 +720,35 @@ document.addEventListener('DOMContentLoaded', function(){
     statsIO.observe(statsEl);
   }
 
-  // Mobile menu toggle
+  // Sidebar toggle (open/close drawer, all screen sizes)
   var burger = document.getElementById('burgerBtn');
-  var mobileMenu = document.getElementById('mobileMenu');
+  var sidebarEl = document.getElementById('sidebar');
   var overlay = document.getElementById('menuOverlay');
   function closeMenu(){
     burger.classList.remove('open');
-    mobileMenu.classList.remove('open');
+    sidebarEl.classList.remove('open');
     overlay.classList.remove('open');
     burger.setAttribute('aria-expanded','false');
     document.body.style.overflow='';
   }
   function openMenu(){
     burger.classList.add('open');
-    mobileMenu.classList.add('open');
+    sidebarEl.classList.add('open');
     overlay.classList.add('open');
     burger.setAttribute('aria-expanded','true');
     document.body.style.overflow='hidden';
   }
-  if(burger && mobileMenu && overlay){
+  if(burger && sidebarEl && overlay){
     burger.addEventListener('click', function(){
-      if(mobileMenu.classList.contains('open')){ closeMenu(); } else { openMenu(); }
+      if(sidebarEl.classList.contains('open')){ closeMenu(); } else { openMenu(); }
     });
     overlay.addEventListener('click', closeMenu);
-    mobileMenu.querySelectorAll('a').forEach(function(a){
+    sidebarEl.querySelectorAll('a').forEach(function(a){
       a.addEventListener('click', closeMenu);
-    });
-    window.addEventListener('resize', function(){
-      if(window.innerWidth > 920) closeMenu();
     });
   }
 })();
 </script>
-<a class="whatsapp-float" href="https://wa.me/918610578887" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.66 4.52 1.8 6.38L4 29l7.79-1.75A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.63 28 15S22.63 3 16.004 3Zm0 21.8a9.77 9.77 0 0 1-4.98-1.36l-.357-.213-4.62 1.04 1.02-4.5-.234-.37A9.76 9.76 0 0 1 6.2 15c0-5.41 4.4-9.8 9.804-9.8 5.4 0 9.796 4.39 9.796 9.8s-4.396 9.8-9.796 9.8Zm5.37-7.34c-.294-.147-1.74-.86-2.01-.958-.27-.098-.467-.147-.664.147-.196.294-.76.958-.932 1.155-.172.196-.343.22-.637.073-.294-.147-1.243-.458-2.368-1.463-.875-.78-1.466-1.744-1.638-2.038-.172-.294-.018-.453.13-.6.133-.132.294-.343.44-.514.148-.172.197-.294.295-.49.098-.196.05-.368-.024-.514-.073-.147-.663-1.6-.91-2.19-.24-.575-.484-.497-.663-.507l-.564-.01c-.196 0-.514.073-.784.368-.27.294-1.03 1.006-1.03 2.454s1.055 2.847 1.2 3.043c.147.196 2.077 3.17 5.033 4.445.703.303 1.252.484 1.68.62.706.225 1.348.193 1.856.117.566-.085 1.74-.712 1.986-1.4.245-.688.245-1.278.172-1.4-.073-.122-.27-.196-.564-.343Z"/></svg>
-</a>
 
 </body>
 </html>
