@@ -350,9 +350,9 @@
   }
   .work-card{
     position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);
-    break-inside:avoid;
+    break-inside:avoid;display:flex;align-items:center;justify-content:center;
   }
-  .work-card img{width:100%;display:block;transition:transform .5s ease;}
+  .work-card img{width:100%;height:auto;display:block;transition:transform .5s ease;}
   .work-card:hover img{transform:scale(1.045);}
   .work-card .cap{
     position:absolute;left:0;right:0;bottom:0;padding:16px 18px;
@@ -391,7 +391,7 @@
   }
   .contact .bigsig-tag{
     font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(255,255,255,.75);margin-top:6px;
+    color:rgba(255,255,255,.75);margin-top:-18px;text-align:right;
   }
   .contact-tri{position:absolute;opacity:.18;}
 
@@ -417,6 +417,8 @@
     .hero h1{font-size:15vw;line-height:.95;}
     .hero .signature{font-size:11vw;}
     .sidebar{width:min(82vw,270px);}
+    .hero-stats{flex-wrap:wrap;row-gap:20px;column-gap:28px;}
+    .heading{flex-direction:column;align-items:flex-start;gap:6px;}
   }
 
   @media (prefers-reduced-motion: reduce){
