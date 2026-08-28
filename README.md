@@ -225,7 +225,7 @@
     font-weight:700;
     font-size:clamp(46px,7.5vw,96px);
     color:var(--ink);
-    margin-top:-26px;
+    margin-top:18px;
     filter:drop-shadow(2px 3px 0 var(--cream));
     display:inline-block;
     opacity:0;
